@@ -1,0 +1,241 @@
+#header {
+    width: 100%;
+    height: 178px;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 3px solid #1a8afa;
+    text-align: center;
+    position: fixed;
+}
+#searchBox {
+    width: 1068px;
+    height: 68px;
+    color: #9fadc6;
+    margin-top: 40px;
+}
+#selectBox {
+    width: 102px;
+    height: 66px;
+    border: 1px solid #9fadc6;
+    font-size: 24px;
+}
+#inputBox {
+    width: 830px;
+    height: 66px;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px;
+    border-top: 1px solid #9fadc6;
+    border-bottom: 1px solid #9fadc6;
+    font-size: 24px;
+}
+#inputBtn {
+    height: 68px;
+    width: 124px;
+    background: url("../images/search.png") no-repeat;
+    background-size: cover;
+}
+
+
+
+
+.ziti1{
+	font-size: 17px;
+}
+
+.ziti2{
+	font-size: 13px;
+	color:#B5AEAE;
+}
+
+.ziti3{
+	font-size: 12px;
+}
+
+.ziti4{
+	font-size: 12px;
+}
+
+.aa{
+	text-decoration: none;
+}
+
+.touxiang{
+	width: 60px;
+	height: 60px;
+	margin-left: 15%;
+	margin-top: 20%;
+	border-radius: 50%;
+}
+
+
+.a1{
+	width: 262px;
+	height: 249px;
+}
+
+.b1{
+	height: 84px;
+}
+
+.b1c1{
+	float:left;
+	height: 100%;
+	width: 30%;
+}
+
+.b1c2{
+	float: right;
+	height: 100%;
+	width: 60%;
+	margin-left: 10%;
+}
+
+.b1c2d1{
+	height: 25%;
+	width: 100%;
+	margin-top: 16%;
+}
+
+.b1c2d2{
+	height: 30%;
+	width: 100%;
+}
+
+.b2{
+	height: 78px;
+}
+
+.b2c1{
+	float: left;
+	height: 70%;
+	width: 20%;
+	margin-top: 6%;
+	margin-left: 22%;
+}
+
+.b2c2{
+	float: right;
+	height: 70%;
+	width: 20%;
+	margin-top: 6%;
+	margin-right: 22%;
+	
+}
+
+.b3{
+	height: 50px;
+	width: 252px;
+	margin-top: 20px;
+	margin-left: 10px;
+}
+
+.b4{
+	height: 15px;
+	width: 262px;
+}
+
+.b4c1{
+	float: left;
+	width: 20%;
+	margin-left: 10px;
+}
+
+.b4c2{
+	float: left;
+	width: 20%;
+	margin-left: 10px;
+	
+}
+
+.b4c3{
+	float: left;
+	width: 20%;
+	margin-left: 10px;
+	
+}
+
+.b4c4{
+	float: left;
+	with:20%;
+	margin-left: 10px;
+	
+}
+
+.a2{
+	height: 146px;
+	width: 262px;
+	margin-top: 20px;
+}
+
+.a2b1{
+	height: 25%;
+	margin-left: 10px;
+}
+
+.a2b2{
+	height: 25%;
+	margin-left: 10px;
+}
+
+.a2b3{
+	height: 25%;
+	margin-left: 10px;
+}
+
+.a2b4{
+	height: 25%;
+	margin-left: 10px;
+}
+
+
+
+/* 控制四个button */
+.resume{
+    height: 35px;
+    width: 35px;
+	border-radius: 30px;
+	margin-top: 10px;
+}
+
+#res{
+	float: left;
+    width: 25%;
+}
+
+#fresh{
+	float: left;
+    width: 25%;
+}
+#upgrade{
+	float: left;
+    width: 25%;
+}
+#mod{
+	float: left;
+    width: 25%;
+}
+
+#myResume{
+    background-image:url('../images/resume_hover.gif');
+    background-size: cover;
+}
+
+#reFresh{
+    background-image:url('../images/refresh_resume_hover.png');
+    background-size: cover;
+}
+#reFresh:hover{
+    background: url('../images/refresh_resume_loading.gif');
+    background-size: cover;
+}
+#upGrade{
+    background-image: url('../images/top_resume_hover.gif');
+    background-size: cover;
+}
+#model{
+    background-image: url('../images/resume_template.5b32e6.gif');
+    background-size: cover;
+}
+
+

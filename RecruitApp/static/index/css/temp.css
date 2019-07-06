@@ -1,0 +1,21 @@
+button{
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #ffffff ;
+    border: none;
+    color: #000000;
+    font-size: 15px;
+    padding: 10px;
+    width: 80px;
+    height:20px; 
+    text-align: left;
+    cursor: pointer;
+}
+
+.company_logo ul div {
+    display:inline;
+    width:180px;
+    height:20px;
+    float:left;
+    color: aliceblue;
+}

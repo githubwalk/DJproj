@@ -12,6 +12,31 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+# 唐 07/06
+from os import environ
+
+
+# 邮件配置
+EMAIL_USE_SSL = True
+
+EMAIL_HOST = 'smtp.qq.com'  # 如果是 163 改成 smtp.163.com
+
+EMAIL_PORT = 465
+
+EMAIL_HOST_USER = "969953579@qq.com"  # 帐号
+
+EMAIL_HOST_PASSWORD = "jdpwvygqhjqqbdca"  # 授权码（****）
+# 默认邮件
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# end
+
+
+
+
+
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

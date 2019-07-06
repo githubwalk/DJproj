@@ -1,0 +1,120 @@
+body,div,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,table{
+    font-family:PingFang SC,Lantinghei SC,Microsoft YaHei,STHeitiSC-Light,simsun;
+    margin:0;
+    padding:0;
+    border:0;
+    font-size: 12px;
+}
+h1,h2,h3,h4,h5,h6{
+    font-size:100%;
+    font-weight:400;
+}
+a{
+    text-decoration:none;
+    color:#29a9db;
+}
+a:link{
+    text-decoration:none;
+}
+a:visited{
+    text-decoration:none;
+}
+a:hover{
+    text-decoration:none;
+}
+/*去掉输入时出现的蓝色外框*/
+a,input:focus{
+    outline:none;
+}
+/*设置字体颜色*/
+*{
+    color: #9fadc6;
+}
+input,button{
+    border:none;
+    background:none;
+    outline:none;
+}
+
+
+body {
+    background: url("../images/login_bkg.jpg");
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+}
+
+.big-bg{
+    max-width: 1440px;
+    margin:0 auto;
+    position: relative;
+}
+
+.login-box{
+    width:340px;
+    min-height:372px;
+    background: #fff;
+    position: absolute;
+    top: 160px;
+    left: 750px;
+    padding: 25px 45px 25px 45px;
+    box-shadow: 0 0 30px #eee;
+    display:block;
+}
+.login-box:after {
+    content:"";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+.login-tit{
+    height: 59px;
+    border-bottom:1px solid #f0f0f0;
+    margin-bottom: 12px;
+    width: 302px;
+    margin-left: 14px;
+    font-size: 33px;
+}
+
+.border{
+    border-bottom: 1px solid #f0f0f0;
+    width: 320px;
+}
+.form .login_input{
+    width: 229px;
+    padding: 15px 0px 20px 10px;
+    display: inline-block;
+    font-size: 16px;
+    color:#333;
+}
+
+.form label{font-size:16px;display: inline-block;width: 64px;}
+
+
+.login-btn {
+    width: 320px;
+    height: 43px;
+    line-height: 43px;
+    margin-top: 20px;
+    border-radius: 4px;
+    background: #1a8afa;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    left: 25px;
+}
+
+.donot_login{
+    float: left;
+    width:320px;
+    margin: 30px auto;
+}
+.donot_login p{float: left;}
+.donot_login a{color: #1a8afa;}
+.fr{ float: right;}
+
+
+

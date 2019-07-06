@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/login.css' %}">
+
+    <!-- 导入动态js脚本 -->
+    <script src="{% static 'scripts/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'scripts/jquery.cookie.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#loginName").blur(function () {
+                inputName = $("#loginName").val();
+                if (inputName == '') {
+                    $("#alertMessage_loginName").html('<font style = "color: red">此项不能为空</font>');
+                }
+                else {
+                    $("#alertMessage_loginName").html('');
+                }
+            })
+            $("#password").blur(function () {
+                passwd = $("#password").val();
+                if (passwd == '') {
+                    $("#alertMessage_password").html('<font style = "color: red">此项不能为空</font>');
+                }
+                else {
+                    $("#alertMessage_password").html('');
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+
+<div class="big-bg">
+
+	<div class="login-box">
+		<h3 class="login-tit">
+			<span class="login-account-c">个人及企业用户登录</span>
+			<!-- span class="safe-login">扫码登录</span>
+			<span class="phoneLogoIn">短信登录</span -->
+		</h3>
+
+        <div class="user-login">
+			<form action="" method="post" id="login_form" class="inner_form" >
+            {% csrf_token %}
+				<div class="form border">
+					<label for="loginName">用户名</label><input class="login_input" id="loginName" name="perEmail" type="text" placeholder="邮箱" value="{{ perEmail }}" />
+				</div>
+				<div class="alert" id="alertMessage_loginName" style="color: red;margin-left: 16px;">
+                </div>
+				<div class="form border">
+					<label for="password">密 码</label><input class="login_input" id="password" name="perPwd" type="password" placeholder="密码" value="" />
+				</div>
+				<div class="alert" id="alertMessage_password" style="color: red;margin-left: 16px;">
+                </div>
+				<div>
+					<input id="submit" name="submit" type="submit" class="login-btn" value="求职者 登录">
+				</div>
+                <div id="alertMessage_wrong">
+                    <font style = "color: red">
+                    {% if msg %}
+                        {{ msg }}
+                    {% endif %}
+                    </font>
+                </div>
+				<div class="donot_login">
+					<p>
+                        <span class="donot_haveaccount">没有智联账号？</span>
+                        <a class="registerLink" href="/register" >立即注册</a>
+                    </p>
+
+					<a href="#" target="_blank" class="fr">忘记密码</a>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

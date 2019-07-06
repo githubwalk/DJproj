@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'register/css/register.css' %}">
+    <!-- 导入动态js脚本 -->
+    <script src="{% static 'scripts/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'scripts/jquery.cookie.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#register_email").blur(function () {
+                inputEmail = $("#register_email").val();
+                if (inputEmail == '') {
+                    $("#alertMessage_email").html('<font style = "color: red">此项不能为空</font>');
+                }
+                else {
+                    $("#alertMessage_email").html('');
+                }
+            })
+            $("#veri_code").blur(function () {
+                code = $("#veri_code").val();
+                if (code == '') {
+                    $("#alertMessage_code").html('<font style = "color: red">此项不能为空</font>');
+                }
+                else {
+                    $("#alertMessage_code").html('');
+                }
+            })
+            
+            $("#sendmsg").onclick(function () {
+                perEmail = $("#register_email").val();
+                $.ajax({
+                    async: true,
+                    url: "/email/" + perEmail,
+                    type: 'post',
+                    headers: {"X-CSRFToken":$.cookie('csrftoken')},
+                    success: function (data) {
+                        alert(data)
+                        if (data == 'True') {
+                            $("#alertMessage_send").html('<font color="green">邮件发送成功</font>')
+                        } else {
+                            $("#alertMessage_send").html('<font color="red">邮件发送失败，请确认邮箱地址无误后重试</font>')
+                        }
+                    }
+                })
+                $("#sendmsg").attr("disabled", true)
+                for (var i = 60; i>0; i--){
+                    setTimeout(function(){
+                        $("#sendmsg").html('<font>'+i+'s后重新发送</font>');
+                    }, 3000);
+                }
+                $("#sendmsg").html('<font>重新发送</font>');
+                $("#sendmsg").attr("disabled", false)
+            })
+        })
+    </script>
+</head>
+<body>
+
+<div class="big-bg">
+
+	<div class="register-box">
+		<h3 class="register-tit">
+			<span class="login-account-c">邮箱注册</span>
+		</h3>
+
+        <div class="user-register">
+			<form action="" method="post" id="login_form" class="inner_form" >
+                {% csrf_token %}
+				<div class="form border">
+					<label for="register_email">邮 箱</label><input class="register_input" id="register_email" name="perEmail" type="text" value="" />
+				</div>
+				<div id="alertMessage_email" style="color: red;margin-left: 16px;">
+                </div>
+				<div class="form border">
+					<label for="veri_code">邮箱验证码</label><input class="register_input" id="veri_code" name="perCode" type="text" value="" />
+				</div>
+				<div id="alertMessage_code" style="color: red;margin-left: 16px;">
+                </div>
+                <button class="send" id="sendmsg"><font>获取验证码</font><tton>
+                <div id="alertMessage_send" style="color: red;margin-left: 16px;">
+                </div>
+				<div>
+					<input id="submit" name="submit" type="button" class="register-btn" value="求职者 注册">
+				</div>
+				<div class="donot_login">
+					<p>
+                        <span class="donot_haveaccount">已有智联账号？</span>
+                        <a class="registerLink" href="/login" >直接登录</a>
+                    </p>
+
+					<a href="#" target="_blank" class="fr"></a>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

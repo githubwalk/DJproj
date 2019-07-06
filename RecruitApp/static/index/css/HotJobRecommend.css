@@ -1,0 +1,89 @@
+.div_li_0{
+	width: 370px;
+	height: 170px;
+}
+.div_li_1{
+	width: 348px;
+	height: 146px;
+	background-color: red;
+}
+.span_li_1{
+	float: left;
+}
+.span_li_2{
+	float: right;
+	color: red;
+}
+.zp-job-condition-label {
+    font-size: 5px;
+    color: #666;
+    margin-right: 10px;
+}
+.zp-job-title {
+    font-size: 16px;
+    color: #333;
+    font-weight: 700;
+    display: inline-block;
+    max-width: 200px;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.zp-job-salary {
+    font-size: 16px;
+    color: #ff5959;
+    font-weight: 700;
+}
+.zp-job-condition {
+    margin-top: 14px;
+    margin-bottom: 10px;
+    line-height: 16px;
+}
+.clearfix {
+    zoom: 1;
+    display: block;
+}
+.zp-job-condition-label {
+    font-size: 5px;
+    color: #666;
+    margin-right: 10px;
+}
+.zp-job-compnay-info {
+    border-top: 1px solid #ededed;
+    
+}
+.fl {
+    float: left;
+}
+/*.clearfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}*/
+.fr {
+    float: right;
+}
+
+.joblist-container__item__flag {
+    /*background: url(//fecdn5.zhaopin.cn/i/assets/check-hover.729535.png) 0 0;*/
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+}/*
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}*/
+.joblist-container__item {
+    padding: 0 21px 21px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+}

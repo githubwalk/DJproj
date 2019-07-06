@@ -1,0 +1,141 @@
+body,div,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,table{
+    font-family:PingFang SC,Lantinghei SC,Microsoft YaHei,STHeitiSC-Light,simsun;
+    border: 0px;
+    margin:0;
+    padding:0;
+    font-size: 12px;
+}
+h1,h2,h3,h4,h5,h6{
+    font-size:100%;
+    font-weight:400;
+}
+/*去掉输入时出现的蓝色外框*/
+a,input:focus{
+    outline: none;
+}
+/*设置字体颜色*/
+*{
+    color: #9fadc6;
+}
+
+body{
+    text-align: center;
+    background: #F4F6F9;
+    position: center;
+}
+.container{
+    width: 860px;
+    display: block;
+    padding: 0px;
+    margin: 0px auto;
+    position: center;
+}
+.header1 {
+    width: 860px;
+    height: 164px;
+    background: url("../images/register_step1.png") no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+}
+.header2 {
+    width: 860px;
+    height: 164px;
+    background: url("../images/register_step2.png") no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+}
+
+.adjs {
+    width: 860px;
+    height: 75px;
+    background: url("../images/register_adjs.png") no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+}
+.register-main {
+    width: 860px;
+    margin-top: 10px;
+    background: white;
+    text-align: left;
+}
+.register-main h1{
+    font-size: 25px;
+    color: black;
+    padding-left: 85px;
+    padding-top: 52px;
+}
+.border{
+    margin-left: 85px;
+    margin-top: 25px;
+}
+
+.form .register_input{
+    width: 600px;
+    padding: 15px 0px 20px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    display: inline-block;
+    font-size: 16px;
+    color:#333;
+}
+
+.form label{font-size:16px;display: inline-block;width: 100px;}
+
+.register-btn {
+    width: 280px;
+    height: 43px;
+    line-height: 43px;
+    margin-top: 20px;
+    margin-left: 100px;
+    border-radius: 4px;
+    background: #1a8afa;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    left: 25px;
+}
+
+.register_time {
+    padding: 15px 0px 20px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    display: inline-block;
+    font-size: 16px;
+    color:#333;
+    width: 400px;
+}
+
+.alert {
+    color: red;
+    margin-left: 16px;
+}
+
+
+#back {
+    width: 280px;
+    height: 43px;
+    line-height: 43px;
+    margin-top: 20px;
+    margin-left: 30px;
+    border-radius: 4px;
+    border: 1px solid;
+    background: #fff;
+    color: #9fadc6;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    left: 25px;
+}
+
+.inputTime {
+    width: 282px;
+    padding: 15px 0px 20px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    display: inline-block;
+    font-size: 16px;
+    color:#333;
+}
