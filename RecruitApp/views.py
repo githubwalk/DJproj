@@ -25,6 +25,7 @@ def index(request, currentCity):
     # TODO
     message = dict()
     message['currentCity'] = currentCity
+    message['jobList'] = jobList
 
     if request.POST:
         return HttpResponse('这里是搜索结果')
@@ -162,8 +163,8 @@ def login(request):
         else:
             # 登录成功
             perCity = obj[0].perCity
-            request.session[obj[0].perUser.id] = {'state': True}
-            re = 'RecruitApp/' + str(perCity) + '/'
+            request.session['state'] = True
+            request.session['email'] = perEmail
             response = render(request, 'RecruitApp.html')
             response.set_signed_cookie('account', perEmail, salt='asds')
             return response
@@ -182,20 +183,22 @@ def perResume(request):
     '''
     return render(request, 'resume.html')
 
-def perSchedule(request):
+def perSchedule(request): #璇 07/07
     '''
     用户单击 '企业反馈' 或 '公司查看' 进入简历状态页面(投递成功 or 被查看)
     input:status
     output:schedule.html or secheduleViewed.html
     '''
-    # get用户要查看的状态
-    val = request.GET.get('status', 0)
-    # 用户单击'企业反馈' status = 0 进入投递成功页面
-    if val == 0:
-        return render(request, 'schedule.html')
-    # 用户单击'公司查看' status = viewed 进入被查看页面
+    val = request.session.get('state', False)
+    if val:
+        perEmail = request.get_signed_cookie('account', '', salt='asds')
+        obj = models.PerInfo.objects.get(perEmail=perEmail)
+        applyPer = obj.perUser
+        dlist = models.ApplyList.objects.filter(applyPer=applyPer)
+        return render(request, 'schedule.html', {'dlist':dlist})
     else:
-        return render(request, 'secheduleViewed.html')
+        return render(request, 'login.html')
+
 
 def resumeModels(request):
     '''
@@ -220,10 +223,15 @@ def workHotspots(request, num):
 
 
 # 骅 07/06
-def ApplyOne(inputUserId,inputJobID):
-    if inputUserId == None or inputJobID == None:
+def ApplyOne(inputUserId,inputJobId):
+    '''
+    多简历投递清单写入数据库辅助函数，写入一条简历投递清单
+    input:inputUserId,inputJobId
+    output:bool
+    '''
+    if inputUserId == None or inputJobId == None:
          return False
-    if models.ApplyList.objects.filter(applyPer=inputUserId, applyJob=inputJobID):#重复了就不添加
+    if models.ApplyList.objects.filter(applyPer=inputUserId, applyJob=inputJobId):#重复了就不添加
         return True
     else:
         aOne= models.ApplyList(applyPer=inputUserId,applyJob=inputUserId)
@@ -231,13 +239,196 @@ def ApplyOne(inputUserId,inputJobID):
             return True
 
 def applyCheckedJobs(request):#ajax post请求
+    '''
+    用户单击"一键投递"多简历投递清单写入数据库并提示成功/失败信息
+    input:
+    output:bool or index.html
+    '''
     if request.POST:
-        inputUserId=request.POST.get('inputUserId',None)#
-        inputJobIDList=request.POST.getlist('inputJobIDList',None)#获取申请公司
+        inputUserId=request.POST.get('inputUserId',None)#获取用户id
+        inputJobIDList=request.POST.getlist('inputJobIDList',None)#获取申请公司id
         for inputJobId in inputJobIDList:
             ApplyOne(inputUserId,inputJobId)#存入数据库
         return HttpResponse(True)#返回ajax为true
     else:#返回默认页
         return render(request,'index.html')
+
+# end
+
+# 骅 07/07
+def recruit(request,currentCity,jobId):
+    '''
+    用户单击首页热门职位按钮进入招聘职位详情页
+    input:
+    output:recriut.html
+    '''
+    if request.POST:
+        inputUserId=request.POST.get('inputUserId',None)#获取用户id
+        inputJobId=jobId#获取申请公司id
+        if ApplyOne(inputUserId,inputJobId):#复用写入一条简历投递清单
+            return render(request,'recruit.html',{'msg':'投递成功！'})
+        else:
+            return render(request,'recruit.html',{'msg':'投递失败！'})
+    else:
+        # 获取当前职位对象信息
+        job=models.Job.objects.filter(id=jobId)
+        # 存入字典
+        recruit = dict()
+        recruit['compUser']=job[0].compUser
+        recruit['jobName']=job[0].jobName
+        recruit['jobProfession']=job[0].jobProfession
+        recruit['jobSalary']=job[0].jobSalary
+        recruit['jobEdu']=job[0].jobEdu
+        recruit['jobExp']=job[0].jobExp
+        recruit['jobNum']=job[0].jobNum
+        recruit['jobSkill']=job[0].jobSkill
+        recruit['jobPublishedTime']=job[0].jobPublishedTime
+        recruit['jobIntro']=job[0].jobIntro
+        recruit['jobClickNum']=job[0].jobClickNum
+        recruit['currentCity']=currentCity
+        return render(request,'recruit.html',recruit)#返回信息并显示
+# end
+
+# 魏 07/07
+def search(request):
+    return render(request,'search.html')
+# end
+
+
+
+
+# 刘 7/7
+from .models import Question, Answer, Review, CollectList, LikeList, PerUser, PerInfo
+from django.urls import reverse
+def postQuestion(quesAuthor, quesTitle, quesContent):
+    '''
+    发表一个问题
+    :param quesAuthor:
+    :param quesTitle:
+    :param quesContent:
+    :return: 问题id（int）
+    '''
+    question = Question(quesAuthor=quesAuthor, quesTitle=quesTitle,
+                    quesContent=quesContent)
+    question.save()
+    return question.id
+
+def collectQuestion(collPerUser, collQuestion):
+    '''
+    收藏一个问题
+    :param collPerUser:
+    :param collQuestion:
+    :return: True为收藏False取消收藏，当前收藏数
+    '''
+    matchSet = CollectList.objects.filter(collPerUser=collPerUser,
+                                          collQuestion=collQuestion)
+    if len(matchSet) == 0:
+        CollectList.objects.create(collPerUser=collPerUser,
+                                          collQuestion=collQuestion)
+        collNum = len(CollectList.objects.filter(collQuestion=collQuestion))
+        return True, collNum
+    else:
+        matchSet[0].delete()
+        collNum = len(CollectList.objects.filter(collQuestion=collQuestion))
+        return False, collNum
+
+def answerQuestion(ansAuthor, ansQuestion, ansContent):
+    Answer.objects.create(ansAuthor=ansAuthor, ansQuestion=ansQuestion,
+                          ansContent=ansContent)
+
+def likeAnswer(likePerUser, likeAnswer):
+    matchSet = LikeList.objects.filter(likeAnswer=likeAnswer,
+                                       likePerUser=likePerUser)
+
+    if len(matchSet) == 0:
+        LikeList.objects.create(likeAnswer=likeAnswer,
+                                       likePerUser=likePerUser)
+        likeNum = len(LikeList.objects.filter(likeAnswer=likeAnswer))
+        return True, likeNum
+    else:
+        matchSet[0].delete()
+        likeNum = len(LikeList.objects.filter(likeAnswer=likeAnswer))
+        return False, likeNum
+
+def postReview(revAuthor, revAnswer, revContent):
+    Review.object.create(revAuthor=revAuthor, revAnswer=revAnswer,
+                         revContent=revContent)
+
+def getPerUserFromSession(request):
+    userEmail = request.session.get('email')
+    perUserObject = PerInfo.objects.get(perEmail=userEmail).perUser
+    return perUserObject
+
+
+class QuestionDisplayer():
+    def __init__(self, question, request=None):
+        '''
+        存储论坛首页问题展示的信息
+        :param question: 问题对象
+        '''
+        self.id = question.id
+        self.title = question.quesTitle
+        self.author = question.quesAuthor
+        self.readCount = question.quesReadCount
+        self.answerCount = len(Answer.objects.filter(ansQuestion=question))
+        self.createTime = question.quesCreateTime
+        self.answers = Answer.objects.filter(ansQuestion=question).order_by('-ansCreateTime')
+        self.bestAnswer = AnswerDisplayer(self.answers[0], request) if len(self.answers)!=0 else None # 是一个AnswerDisplayer
+        try:
+            print(self.bestAnswer.ansAuthor.perinfo.perHeadPath,"========================================================")
+        except Exception:
+            pass
+
+class AnswerDisplayer():
+    def __init__(self, Answer, request):
+        self.id = Answer.id
+        self.content = Answer.ansContent
+        self.author = Answer.ansAuthor
+        self.createTime = Answer.ansCreateTime
+        self.likeCount = len(LikeList.objects.filter(likeAnswer=Answer))
+        self.isLiked = len(LikeList.objects.filter(likePerUser=getPerUserFromSession(request))) != 0
+
+
+
+def forumIndex(request):
+    # request.session['email'] = '123@qq.com'  # 本人测试用，可以删
+    print(request.session['email'])
+    para = {}
+    para['websiteIconPath'] = "https://www.baidu.com/img/baidu_jgylogo3.gif"  # 测试用，网页logo
+    para['msgNum'] = 10   # 测试用，用户的未查看消息提示
+    displayQuestions = Question.objects.order_by('-quesCreateTime')
+    para['problems'] = [QuestionDisplayer(question, request) for question in displayQuestions]
+    para['userHeadIcon'] = '/static/' + getPerUserFromSession(request).perinfo.perHeadPath
+    return render(request, 'forumIndex.html', para)
+
+def postQuestionView(request):
+    '''相应发布的问题'''
+    if request.method == "POST":
+        quesTitle = request.POST.get('title', '')
+        quesContent = request.POST.get('content', '')
+        quesAuthor = getPerUserFromSession(request)
+        questionId = postQuestion(quesAuthor, quesTitle, quesContent)
+        return redirect(reverse('questionPage', kwargs={'questionId': questionId}))
+    else:
+        return redirect(reverse('forumIndex'))
+
+def likeView(request, answerId):
+    '''响应点赞操作'''
+    likePerUserObject = getPerUserFromSession(request)
+    likeAnswerObject = Answer.objects.filter(id=answerId)[0]
+    likeOrCancel, likeNum = likeAnswer(likePerUserObject, likeAnswerObject)
+    return HttpResponse(str(likeOrCancel) + ';' + str(likeNum))
+
+
+
+def questionPage(request, questionId):
+    # 弄一下阅读数
+    questionObject = Question.objects.get(id=questionId)
+    questionObject.quesReadCount += 1
+    questionObject.save()
+    return HttpResponse('questionPage: %d' % questionId)
+
+def userPage(request):
+    return HttpResponse('userpage')
 
 # end

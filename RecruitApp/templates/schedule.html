@@ -4,9 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <script type="text/javascript" src="{% static 'index/scripts/temp.js' %}"></script>
+    <script type="text/javascript" src="{% static 'index/scripts/jquery-3.2.1.min.js' %}"></script>
     <title>Document</title>
+    <style type="text/css">
+        ul{
+            list-style-type:none;
+        }
+
+        .tanchucaidan{ 
+            display:none;
+        }
+        /*设置弹出菜单默认隐藏*/
+        
+        .dingjicaidan li:hover ul{
+            display:block;
+        } 
+        /*当鼠标移动到dingjicaidan下的li标签时，改变li下的ul标签的display属性（显示出来）*/
+    </style>
+    <script>
+        $(document).ready(function(){
+            $("#scheSend").click(function(){
+                document.getElementById("shcenosucceed").style.display='none';
+                document.getElementById("shcesucceed").style.display='none';
+                document.getElementById("shcesend").style.display='block';
+            })
+            $("#scheSucceed").click(function(){
+                document.getElementById("shcesend").style.display='none';
+                document.getElementById("shcenosucceed").style.display='none';
+                document.getElementById("shcesucceed").style.display='block';
+            })
+            $("#scheNoSucceed").click(function(){
+                document.getElementById("shcesend").style.display='none';
+                document.getElementById("shcesucceed").style.display='none';
+                document.getElementById("shcenosucceed").style.display='block';
+            })
+        })
+    </script>
 </head>
 <body>
-        schedule 成功投递记录
+    <div><a style="float: left;widows: 180px;" href="">[切换城市]</a></div>
+    <div>
+        <ul class="dingjicaidan">
+        <li>
+            perName
+            <ul class="tanchucaidan">
+                <li><a href="/RecruitApp/chongqing/">个人中心</a></li>
+                <li><a href="/RecruitApp/per/resume/">我的简历</a></li>
+                <li><a href="/RecruitApp/per/schedule/?status=viewed">求职反馈</a></li>
+                <li><a href="/RecruitApp/resumeCenter/accountSet/">账号设置</a></li>
+                <li><a href="/RecruitApp/resumeCenter/myCollect/">我的收藏</a></li>
+                <li><a href="/RecruitApp/resumeCenter/myOrder/">我的订单</a></li>
+                <li><a href="/RecruitApp/resumeCenter/JobSeekerStatistics/">求职统计</a></li>
+                <li><a href="/logout/">退出</a></li>
+            </ul>
+        </li>
+    </ul> 
+    </div>
+    <div><p>这是一个搜索框</p></div>
+    <div>
+        <button id="scheSend">已投递</button>
+        <button id="scheSucceed">已通过</button>
+        <button id="scheNoSucceed">未通过</button>
+        <div id='shcesend' style="display: block">
+            {% for sche in dlist %}
+            <tr>
+                <td>{{ sche.applyPer }}</td>
+                <td>{{ sche.applyJob }}</td>
+                <td>{{ sche.applyTime }}</td>
+                <td>{{ sche.applyState }}</td>
+                <br>
+            </tr>
+            {% empty %}
+                暂无数据
+            {% endfor %}
+        </div>
+        
+        <div id='shcesucceed' style="display: none">
+            {% for schesucceed in dlist %}
+            <tr>
+                {% if schesucceed.applyState == True %}
+                <td>{{ schesucceed.applyPer }}</td>
+                <td>{{ schesucceed.applyJob }}</td>
+                <td>{{ schesucceed.applyTime }}</td>
+                <td>{{ schesucceed.applyState }}</td>
+                <br>
+                {% endif %}
+            </tr>
+            {% empty %}
+                暂无数据
+            {% endfor %}
+        </div>
+
+        <div id='shcenosucceed' style="display: none">
+            {% for shcenosucceed in dlist %}
+            <tr>
+                {% if shcenosucceed.applyState == False %}
+                <td>{{ shcenosucceed.applyPer }}</td>
+                <td>{{ shcenosucceed.applyJob }}</td>
+                <td>{{ shcenosucceed.applyTime }}</td>
+                <td>{{ shcenosucceed.applyState }}</td>
+                <br>
+                {% endif %}
+            </tr>
+            {% empty %}
+                暂无数据
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>

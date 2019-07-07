@@ -1,0 +1,161 @@
+
+
+.forum_search{
+	height: 76px;
+	background-color: bisque;
+}
+
+.forum_search_icon{
+	float: left;
+	height: 70px;
+	width: 300px;
+	background: #4992A8;
+	margin-left: 20px;
+	
+}
+
+.forum_search_bar{
+	float: left;
+	height: 36px;
+	width: 362px;
+	background:#3867AF;
+	margin-left: 80px;
+	
+}
+
+.forum_search_message{
+	float: left;
+	height: 16px;
+	width: 50px;
+	background:#E53B3E;
+	margin-left: 80px;
+	
+}
+
+.forum_search_headImg{
+	float: left;
+	height: 38px;
+	width: 38px;
+	background:#D37F81;
+	margin-left: 80px;
+	
+}
+
+.forum_question{
+	height: 300px;
+	width: 800px;
+	background-color:#5B0C0D;
+	margin-top: 20px;
+}
+
+.forum_question_title{
+	height: 50px;
+	width: 800px;
+	background-color:aqua;
+}
+
+.forum_question_title_type{
+	float: left;
+	height: 38px;
+	width: 50px;
+	background-color:#E86769;
+}
+
+.forum_question_title_word{
+	float: left;
+	height: 38px;
+	width: 500px;
+	background-color:#6433CB;
+	margin-left: 30px;
+}
+
+.forum_question_content{
+	height: 200px;
+	width: 800px;
+	background-color:#D12BD5;
+}
+
+.forum_question_release{
+	height: 40px;
+	width: 60px;
+	background-color:#B16768;
+}
+
+.forum_problem{
+	height: 400px;
+	width: 800px;
+	background-color: aquamarine;
+	margin-top: 20px;
+}
+
+.forum_problem_title{
+	height: 50px;
+	width: 800px;
+	background-color: #E3797B;
+}
+
+.forum_problem_title_word{
+	float: left;
+	height: 50px;
+	width: 550px;
+	background-color: #31BB9B;
+}
+
+.forum_problem_title_read{
+	float: left;
+	height: 50px;
+	width: 50px;
+	background-color:aqua;
+}
+
+.forum_problem_title_answer{
+	float: left;
+	height: 50px;
+	width: 50px;
+	background-color:#B43739;
+}
+
+.forum_problem_user{
+	height: 50px;
+	width: 800px;
+	background-color: #AB7273;
+}
+
+.forum_problem_user_headImg{
+	float: left;
+	height: 30px;
+	width: 30px;
+	background-color:#B43739;
+}
+
+.forum_problem_content{
+	height: 150px;
+	width: 800px;
+	background-color:#DD66ED;
+}
+
+.forum_problem_time{
+	height: 50px;
+	width: 800px;
+	background-color:#E04B4D;
+}
+
+.forum_problem_like{
+	height: 50px;
+	width: 800px;
+	background-color:#E89597;
+}
+
+.forum_problem_like_like{
+	float: left;
+	height: 50px;
+	width: 50px;
+	background-color:#6599C4;
+}
+
+.forum_problem_like_comment{
+	float: left;
+	height: 50px;
+	width: 50px;
+	background-color:#EF96C8;
+}

@@ -1,4 +1,4 @@
-button{
+button,button1,button2,button3,button4,button5{
     display: inline-block;
     border-radius: 4px;
     background-color: #ffffff ;
@@ -12,14 +12,11 @@ button{
     cursor: pointer;
 }
 
-#IT,#MBA,#FDC,#MY,#GG,#FWY,#SC,#RS{
-    display: none;
+.checked{
+    color:#8EE5EE;
+    cursor:pointer;
 }
-
-.company_logo ul div {
-    display:inline;
-    width:180px;
-    height:20px;
+li{
+    list-style:none;
     float:left;
-    color: aliceblue;
 }

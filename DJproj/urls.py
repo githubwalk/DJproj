@@ -52,14 +52,29 @@ urlpatterns = [
     # end
 
     # 璇 07/06
-    path('RecruitApp/per/resume/', RecruitApp_v.perResume),
-    path('RecruitApp/per/schedule/', RecruitApp_v.perSchedule),
-    path('RecruitApp/per/resumemodels/', RecruitApp_v.resumeModels),
-    path('RecruitApp/per/question/<int:num>/', RecruitApp_v.workHotspots),
+    path('RecruitApp/per/resume/', RecruitApp_v.perResume), # 个人简历
+    path('RecruitApp/per/schedule/', RecruitApp_v.perSchedule), # 简历交流
+    path('RecruitApp/per/resumemodels/', RecruitApp_v.resumeModels), 
+    path('RecruitApp/per/question/<int:num>/', RecruitApp_v.workHotspots), #职场论坛问题
     # end
-
 
     # 骅 07/06
     path('apply/applyCheckedJobs/', RecruitApp_v.applyCheckedJobs),
+    # end
+
+    # 骅 07/07
+    path('apply/recruit/<str:currentCity>/<int:jobId>', RecruitApp_v.recruit),  # 岗位详情
+    # end
+
+    # 魏 07/07
+    path('RecruitApp/se/search/',RecruitApp_v.search),  # 搜索二级页面
+    # end
+
+    # 刘 7/7
+    path('forum/', RecruitApp_v.forumIndex, name="forumIndex"), # 论坛主页
+    path('forum/postQuestion/', RecruitApp_v.postQuestionView),
+    path('forum/question/<int:questionId>', RecruitApp_v.questionPage, name="questionPage"),
+    path('forum/userPage/', RecruitApp_v.userPage, name="userPage"),
+    path('forum/like/<int:answerId>', RecruitApp_v.likeView),
     # end
 ]

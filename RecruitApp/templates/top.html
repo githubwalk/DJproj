@@ -1,0 +1,23 @@
+<div>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index/css/index.css'%}">
+    
+    {{ currentCity }}
+
+    <!-- 川, 07/06 搜索框-->
+    <div id="header">
+        <div id="searchBox">
+            <form id="form search" method="post">
+                {% csrf_token %}
+                <select id="selectBox" name="catelog">
+                    <option value="company">公司</option>
+                    <option value="profession">职位</option>
+                </select>
+                <input id="inputBox" type="text" placeholder="">
+                <input id="inputBtn" type="submit" value="">
+            </form>
+        </div>
+    </div>
+
+    <!--end-->
+</div>

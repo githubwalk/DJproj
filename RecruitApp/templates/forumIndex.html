@@ -1,0 +1,159 @@
+<!doctype html>
+<!-- websiteIconPath msgNum problems-->
+<html>
+<head>
+<meta charset="utf-8">
+<title>论坛</title>
+	{% load static %}
+	<link href="{% static 'forum/forumIndex.css' %}" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="{% static 'scripts/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scripts/jquery.cookie.js' %}"></script>
+</head>
+	
+<body>
+	<div class="forum_search">
+<!--	公司图标	-->
+		<div class="forum_search_icon">
+			<img src="{{websiteIconPath}}" alt="论坛网页logo">
+<!--			<img class="forum_search_img" src="../好看的图片哦/555.jpg">-->
+		</div>
+<!--	搜索框	-->
+		<div class="forum_search_bar">
+			<form method="get" action="/forum/search/">
+				<input type="text" name="q" placeholder="搜一搜感兴趣的问题..." autocomplete="off">
+				<input type="submit" name="submit" value="搜索">
+			</form>
+		</div>
+<!--	消息	-->
+		<div class="forum_search_message">
+			<a href="/forum/userPage/">消息({{msgNum}})</a>
+		</div>
+<!--	用户头像	-->
+		<div class="forum_search_headImg">
+			<a href="/forum/userPage/"><img src="{{userHeadIcon}}" alt="用户头像"></a>
+		</div>
+		
+	</div>
+	
+	<div class="forum_question">
+<!--	标题		-->
+		<form method="post" action="/forum/postQuestion/">
+			{% csrf_token %}
+			<div class="forum_question_title">
+				<div class="forum_question_title_type">
+					<h3>提问题</h3>
+				</div>
+				<div class="forum_question_title_word">
+					<input type="text" name="title" placeholder="请输入问题标题，必填" required autocomplete="off">		
+				</div>
+			</div>
+	<!--	内容	-->
+			<div class="forum_question_content">
+				<input type="text" name="content" placeholder="详细描述你的问题吧，选填" autocomplete="off">
+			</div>
+	<!--	发布	-->
+			<div class="forum_question_release">
+				<input type="submit" name="submit" value="发布">
+			</div>
+		</form>
+	</div>
+	
+	<div class="forum_problem"> 
+		<ul>
+			{% for problem in problems %}
+			<li>
+				<div class="forum_problem_title">
+			<!--	标题	-->
+					<div class="forum_problem_title_word">
+						<h3><a href="/forum/question/{{problem.id}}">{{problem.title}}</a></h3>
+
+					</div>
+			<!--	阅读量	-->
+					<div class="forum_problem_title_read">
+						阅读：{{problem.readCount}}
+					</div>
+			<!--	回答量	-->
+					<div class="forum_problem_title_answer">
+						回答量：{{problem.answerCount}}
+					</div>
+				</div>
+				
+				{% if problem.bestAnswer %}
+				<div class="forum_problem_user">
+					
+					<div class="forum_problem_user_headImg">
+						<img src="/static/{{ problem.author.perinfo.perHeadPath }}">
+					</div>
+					<div class="forum_problem_user_name">
+						<div>
+							{{ problem.bestAnswer.author.perinfo.perName }}
+						</div>
+					</div>
+
+				</div>
+				
+				<div class="forum_problem_content">
+					{{ problem.bestAnswer.content }}
+				</div>
+				
+				<div class="forum_problem_time">
+					创建日期 : {{ problem.bestAnswer.createTime }}
+				</div>
+				
+				<div class="forum_problem_like">
+					<!-- 判断是否已经赞过 -->
+					{% if problem.bestAnswer.isLiked %}
+					<div class="forum_problem_like_like">
+						👍<button id="like_btn" onclick="likeClick({{problem.bestAnswer.id}})">取消赞</button><div id="like_num">({{problem.bestAnswer.likeCount}})</div>
+					</div>
+					{% else %}
+					<div class="forum_problem_like_like">
+						👍<button id='like_btn' onclick="likeClick({{problem.bestAnswer.id}})">赞</button><div id="like_num">({{problem.bestAnswer.likeCount}})</div>
+					</div>
+					{% endif %}
+					<div class="forum_problem_like_comment">
+					</div>
+				</div>
+				{% else %}
+				<div class="forum_problem_user">
+					<div>
+						暂无回答
+					</div>
+				</div>
+				{% endif %}
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</body>
+</html>
+
+
+<script>
+
+function likeClick(answerId){
+	$.ajax({
+		async: true,
+		url: "/forum/like/" + answerId,
+		type: "get",
+		headers:{"X-CSRFToken":$.cookie("csrftoken")},
+		// beforeSend: function(){
+		// 	$("#unique_msg").html("loading");
+		// },
+		success:function(data){
+			var datas = data.split(';');
+			var likeOrCancel = datas[0];
+			var likeNum = datas[1];
+			if(likeOrCancel == 'True'){
+				$('#like_btn').html('取消赞');
+			}
+			else{
+				$('#like_btn').html('赞');
+			}
+			$('#like_num').html('(' + likeNum + ')');
+		}
+	});
+
+}
+
+</script>

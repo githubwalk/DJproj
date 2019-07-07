@@ -1,0 +1,168 @@
+<!--骅 07/07 招聘详情二级页-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>招聘信息{{ jobName }}</title>
+    <link rel="stylesheet" href="{% static 'recruit/css/recruit.css' %}">
+    <script src="{% static 'recruit/js/jq.js' %}"></script>
+    <script src="{% static 'recruit/js/recruit.js' %}"></script>
+    <script src="{% static 'recruit/js/ck.js' %}"></script>
+</head>
+<body id="top">
+  <div class="app">
+    <div class="navigation a-center-layout__content">
+    <!-- 头部 -->
+    </div>
+    <div class="job-summary">
+      <div class="summary-plane">
+        <div class="summary-plane__content">
+          <!---->
+          <div class="summary-plane__top">
+            <span class="summary-plane__time">
+              <i class="iconfont icon-update-time"></i>{{ jobPublishedTime }}</span>
+          </div>
+          <h3 class="summary-plane__title">{{ jobName }}</h3>
+          <div class="summary-plane__bottom">
+            <div class="summary-plane__left">
+              <span class="summary-plane__salary">{{ jobSalary }}</span>
+              <ul class="summary-plane__info">
+                <li>
+                  <a href="https://www.alibaba.com/" target="_blank">{{ compUser }}</a>
+                  <!----></li>
+                <li>{{ jobProfession }}</li>
+                <li>{{ jobExp }}</li>
+                <li>{{ jobEdu }}</li>
+                <li>招{{ jobNum }}人</li></ul>
+            </div>
+            <div class="summary-plane__right">
+              <button class="summary-plane__collection summary-plane__collection">
+                <span>
+                  <i class="iconfont icon-collect summary-plane__collect"></i>收藏</span>
+              </button>
+              <div class="a-job-apply-button summary-plane__action">
+                <button type="button" class="a-button a--bordered a--filled">申请职位</button>
+                <!----></div>
+            </div>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <div class="summary-fixed" style="display: none">
+        <div class="summary-fixed__content">
+          <div class="summary-fixed__left">
+            <div class="summary-fixed__job">
+              <span class="summary-fixed__header">{{ jobName }}</span>
+              <span class="summary-fixed__line">/</span>
+              <span class="summary-fixed__salary">{{ jobSalary }}</span></div>
+          </div>
+          <div class="summary-fixed__right">
+            <div class="a-job-apply-button summary-fixed__action">
+              <button type="button" class="a-button a--bordered a--filled">申请职位</button>
+              <!----></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="a-center-layout__content">
+      <div class="app-main__left">
+        <div class="job-detail">
+          <!---->
+          <div class="highlights">
+            <h2 class="highlights__title">职位亮点</h2>
+            <div class="highlights__content">
+              <span class="highlights__content-item">五险一金</span>
+              <span class="highlights__content-item">年底双薪</span>
+              <span class="highlights__content-item">绩效奖金</span>
+              <span class="highlights__content-item">交通补助</span>
+              <span class="highlights__content-item">通讯补助</span>
+              <span class="highlights__content-item">带薪年假</span>
+              <span class="highlights__content-item">员工旅游</span>
+              <span class="highlights__content-item">节日福利</span></div>
+          </div>
+          <div class="describtion">
+                <h2 class="describtion__title">职位技能</h2>
+                <!---->
+                <div class="describtion__detail-content">
+                  <p class="job-intro">{{ jobSkill }}</p>
+                </div>
+              </div>
+          <div class="describtion">
+            <h2 class="describtion__title">职位描述</h2>
+            <!---->
+            <div class="describtion__detail-content">
+              <p class="job-intro">{{ jobIntro }}</p>
+            </div>
+          </div>
+          <div class="job-address">
+            <h2 class="job-address__title">点击数</h2>
+            <div class="job-address__content">
+              <span class="job-address__content-text">
+                <i class="iconfont icon-locate"></i>{{ jobClickNum }}</span>
+              <!---->
+              <div id="address__mapContainer" class="job-address__content-map" style="display:none;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="warning">
+          <span class="warning__text">以担保或任何理由索要财物，扣押证照，均涉嫌违法。一经发现，</span>
+          <button class="warning__report-violation">立即举报</button>
+          <button class="warning__close"></button>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+
+        <div job-number="CC148933016J90250227000" job-detail="[object Object]" class="job-similar">
+          <div class="job-similar__list">
+            <div class="similar-header">
+              <h2 class="similar-header__recommend">相似推荐</h2>
+              <div class="similar-header__deliver">
+                <label class="a-checkbox a--selected">
+                  <span class="a-checkbox__mark a--bordered"></span>
+                  <input aria-hidden="true" type="checkbox" class="a-checkbox__native" id="ckAll">全选</label>
+                <div class="a-job-apply-button similar-header__action">
+                  <button type="button" class="a-button a--bordered a--filled" id="appAll">申请职位</button>
+                  <!----></div>
+              </div>
+            </div>
+            <ul class="list">
+              <li class="list__item">
+                <label>
+                  <i class="list__flag"></i>
+                  <img width="32" height="32" src="{% static 'recruit/images/checked.png' %}" title="选中职位" alt="选中职位" class="list__imgs">
+                  <input type="checkbox" class="list__hidden"></label>
+                <a href="/RecruitApp/{{ currentCity }}" zp-stat-jdno="CC476208537J00125169706" zp-stat-pos="0" zp-stat-pagelim="20" zp-stat-id="jd_click" zp-stat-track="jd_click" zp-stat-pageno="1" zp-stat-funczone="402001" class="list__link">
+                  <div class="list__replace" style="display: none;"></div>
+                  <div class="list__top">
+                    <span class="fl list__top-header">更多招聘</span>
+                    <span class="list__top-txt">更多薪资</span></div>
+                  <div class="list__bottom">
+                    <button class="list__bottom-txt">更多公司</button>
+                    <div class="list__hide">
+                      <div class="a-job-apply-button list__action" source="RECOMMENDATION" style="display: none;">
+                        <button type="button" class="a-button a--bordered a--filled">更多职位</button>
+                        <!----></div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div id="msg"></div>
+          <!----></div>
+      </div>
+      <div class="to-top">
+          <a href="#top">
+            <i  class="iconfont icon-rocket"></i>
+          </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<!--end-->

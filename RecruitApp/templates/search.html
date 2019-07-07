@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'search/js/temp.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'search/css/temp.css'%}">
+    <div id="header">
+        <div id="searchBox">
+            <form id="form search" action='/RecruitApp/search/'method="get">
+                <!-- {% csrf_token %} -->
+                <select id="selectBox" name="catelog">
+                    <option value="0">公司</option>
+                    <option value="1">职位</option>
+                </select>
+                <input id="inputBox" type="text" name='kw' placeholder="">
+                <input id="inputBtn" type="submit" value="搜索">
+            </form>
+        </div>
+    </div>
+
+</head>
+
+
+<body>
+    <div id="search" class="query-search">
+        <div class="query-search__border">
+            <div class="query-search__border__item">地点:</div>
+            <div class="query-search__border__content ">
+                <div id="queryCityBox" class="query-city">
+                    <ul id="queryTitleUls" class="clearfix query-city__uls">
+                        <li class="currentCity query-city__uls__li current-city">
+                            <button id='CityFather' name='CityChild' style="color:#8EE5EE;" onclick="SelectCity(this.name)">不限</button>
+                        </li>
+                    </ul>
+                    <div id='CityChild' style="display:none;float:left;">
+                        <ul class="choiseCity clearfix city-child__choise">
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 class='checked' onclick="ChangeCity(this)">不限
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)" id='beijing'>北京
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)" id='shanghai'>上海
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)" id='shenzhen'>深圳
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)" id='guangzhou'>广州
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='tianjin'>天津
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='chengdu'>成都
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='hangzhou'>杭州
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='wuhan'>武汉
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='dalian'>大连
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='changchun'>长春
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='nanjing'>南京
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='jinan'>济南
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='qingdao'>青岛
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='lanzhou'>兰州
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='shenyang'>沈阳
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='xian'>西安
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='zhengzhou'>郑州
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='changshou'长沙>
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='chongqing'>重庆
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='haerbin'>哈尔滨
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='yinchuan'>银川
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='taiyuan'>太原
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='fuhou'>福州
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='xiamen'>厦门
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='shijiazhuang'>石家庄
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='hefei'>合肥
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='lasa'>拉萨
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='wulumuqi'>乌鲁木齐
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='huhehaote'>呼和浩特
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='xining'>西宁
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='kunming'>昆明
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='nanchang'>南昌
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='haikou'>海口
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='nanning'>南宁
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='guiyang'>贵阳
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='taibei'>台北
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='xianggang'>香港
+                            </li>
+                            <li class="cityItemBox city-child__choise__city">
+                                <button1 onclick="ChangeCity(this)"id='aomen'>澳门
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="query-search__border">
+            <div class="query-search__border__item">行业:</div>
+            <div class="query-search__border__content">
+                <div class="query-industry">
+                    <ul class="industryUls query-industry__uls">
+                            <li class="query-industry__uls__item">
+                                    <button2 id='0'onclick="ChangeWork(this)">不限
+                                </li>
+                        <li class="query-industry__uls__item">
+                            <button2 id='1'onclick="ChangeWork(this)">互联网IT
+                        </li>
+                        <li class="query-industry__uls__item">
+                            <button2 id='2'onclick="ChangeWork(this)">金融
+                        </li>
+                        <li class="query-industry__uls__item">
+                            <button2 id='3'onclick="ChangeWork(this)">房地产/建筑
+                        </li>
+                        <li class="query-industry__uls__item">
+                            <button2 id='4'onclick="ChangeWork(this)">贸易/零售/物流
+                        </li>
+                        <li class="query-industry__uls__item">
+                            <button2 id='5'onclick="ChangeWork(this)">教育/传媒/广告
+                        </li>
+
+                        <li class="query-industry__uls__item">
+                            <button2 id='6'onclick="ChangeWork(this)">服务业
+                        </li>
+                        <li class="query-industry__uls__item">
+                            <button2 id='7'onclick="ChangeWork(this)">市场/销售
+                        </li>
+                        <li class="query-industry__uls__item">
+                            <button2 id='8'onclick="ChangeWork(this)">人事/财务/行政
+                        </li>
+
+                    </ul>
+                    <div class="query-industry__clear"></div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="query-search__border">
+            <div class="query-search__border__item">月薪:</div>
+            <div class="query-search__border__content">
+                <div class="query_salary_box query-salary">
+                    <ul class="query-salary__uls">
+                        <li class="query-salary__uls__li">
+                            <button3 id='0'onclick="ChangeMoney(this)">不限
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id='1'onclick="ChangeMoney(this)">1K以下
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id='2'onclick="ChangeMoney(this)">1K~2K
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id='3'onclick="ChangeMoney(this)">2K~4K
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id="4" onclick="ChangeMoney(this)">4K~6K
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id="5" onclick="ChangeMoney(this)">6K~8K
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id="6" onclick="ChangeMoney(this)">8K~10K
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id="7" onclick="ChangeMoney(this)">10K~15K
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id="8" onclick="ChangeMoney(this)">15K~25K
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id="9" onclick="ChangeMoney(this)">25k~35K
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id="10" onclick="ChangeMoney(this)">35K~50K
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id="11" onclick="ChangeMoney(this)">50K~75K
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id="12" onclick="ChangeMoney(this)">75K~100K
+                        </li>
+                        <li class="query-salary__uls__li">
+                            <button3 id="13" onclick="ChangeMoney(this)">100K以上
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="query-search__border">
+            <div class="query-search__border__content">
+                <div class="query-others">
+
+                    <div class="query-others__title">
+                        <div class="query-others__title__item query-others__title__item">
+                            <span class="">工作经验</span>
+                            <span class="query-others__title__down"></span>
+                        </div>
+                        <div class="query-others__borders workExperience">
+                            <ul class="query-others__borders__detail">
+                                <li class="query-others__borders__detail__item ">
+                                    <button4 id='0'onclick="ChangeYear(this)">不限
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button4 id="1" onclick="ChangeYear(this)">无经验
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button4 id="2" onclick="ChangeYear(this)">1年以下
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button4 id="3" onclick="ChangeYear(this)">1~3年
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button4 id="4" onclick="ChangeYear(this)">3~5年
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button4 id="5" onclick="ChangeYear(this)">5~10年
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button4 id="6" onclick="ChangeYear(this)">10年以上
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+        </div>
+        <div class="query-search__border">
+            <div class="query-search__border__content">
+                <div class="query-others">
+                    <div class="query-others__title">
+                        <div class="query-others__title__item query-others__title__item">
+                            <span class="">学历要求</span>
+                            <span class="query-others__title__down"></span>
+                        </div>
+                        <div class="query-others__borders education">
+                            <ul class="query-others__borders__detail">
+                                <li class="query-others__borders__detail__item ">
+                                    <button5 id='0'onclick="ChangeStudy(this)">不限
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button5 id="1" onclick="ChangeStudy(this)">高中/中专/中技及以下
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button5 id="2" onclick="ChangeStudy(this)">大专及同等学历
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button5 id="3" onclick="ChangeStudy(this)">本科/学士及等同学历
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button5 id="4" onclick="ChangeStudy(this)">硕士/研究生及等同学历
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button5 id="5" onclick="ChangeStudy(this)">博士及以上
+                                </li>
+                                <li class="query-others__borders__detail__item">
+                                    <button5 id="6" onclick="ChangeStudy(this)">其他
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</body>
+
+</html>

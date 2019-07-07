@@ -4,14 +4,14 @@
     margin: 0px;
     padding: 0px;
     border-bottom: 3px solid #1a8afa;
-    text-align: center;
+	text-align: center;
     position: fixed;
 }
 #searchBox {
     width: 1068px;
     height: 68px;
     color: #9fadc6;
-    margin-top: 40px;
+	margin-top: 40px;
 }
 #selectBox {
     width: 102px;
@@ -32,8 +32,9 @@
 #inputBtn {
     height: 68px;
     width: 124px;
-    background: url("../images/search.png") no-repeat;
-    background-size: cover;
+	background: url("../images/search.png") no-repeat;
+	background-size: cover;
+	float: right;
 }
 
 

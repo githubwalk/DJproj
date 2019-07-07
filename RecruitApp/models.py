@@ -1,5 +1,8 @@
 from django.db import models
 
+# 7/7 1:16 刘飞逸 add
+import django.utils.timezone as timezone
+
 # parameter
 max_length = 50
 
@@ -8,7 +11,11 @@ class PerUser(models.Model):
     '''
     个人用户类
     '''
+
     perOthers = models.TextField()
+
+    # 7/7 1:16 刘飞逸 add
+    perLastClickMsgTime = models.DateTimeField("LastTimeToClickMsg", default=timezone.now)  # 论坛里，用户最后一次点击信息推送的时间
 
     def __str__(self):
         return self.perinfo.perName
@@ -126,3 +133,77 @@ class ApplyList(models.Model):
 
     def __str__(self):
         return self.applyPer.PerInfo.perName + '-' + self.applyJob.jobName
+
+
+
+
+
+
+# 7/7 1:16 刘飞逸 add
+class Question(models.Model):
+    '''
+    论坛中的提问帖子
+    '''
+    quesAuthor = models.ForeignKey(PerUser, on_delete=models.CASCADE)
+    quesTitle = models.CharField(max_length=max_length)
+    quesContent = models.TextField(default="")
+    quesReadCount = models.IntegerField(default=-1)
+    quesCreateTime = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.quesTitle
+
+
+class Answer(models.Model):
+    '''
+    论坛里对应每一个问题的回答。
+    '''
+    ansQuestion = models.ForeignKey(Question, on_delete=models.CASCADE)
+    ansAuthor = models.ForeignKey(PerUser, on_delete=models.CASCADE)
+    ansContent = models.TextField()
+    ansCreateTime = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.ansContent
+
+
+class Review(models.Model):
+    '''
+    对每一条回答的评论
+    '''
+    revAnswer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    revAuthor = models.ForeignKey(PerUser, on_delete=models.CASCADE)
+    revContent = models.TextField()
+    revCreateTime = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.revContent
+
+
+class CollectList(models.Model):
+    '''
+    收藏记录表，(问题与用户的中间表)
+    '''
+    collQuestion = models.ForeignKey(Question, on_delete=models.CASCADE)
+    collPerUser = models.ForeignKey(PerUser, on_delete=models.CASCADE)
+    collCreateTime = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.collPerUser + "-" + self.collQuestion
+
+
+class LikeList(models.Model):
+    '''
+    点赞记录表
+    '''
+    likeAnswer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    likePerUser = models.ForeignKey(PerUser, on_delete=models.CASCADE)
+    likeCreateTime = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.likePerUser + "-" + self.likeAnswer
+
+
+
+
+
